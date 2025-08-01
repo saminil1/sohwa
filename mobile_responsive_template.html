@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신당동성당 소화 - 모바일 최적화 템플릿</title>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Mobile First Approach */
+        :root {
+            --primary: #003FA8;
+            --secondary: #0056D6;
+            --accent: #FFD700;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #333;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.16);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Mobile Header */
+        .mobile-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 16px;
+        }
+        
+        .mobile-header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            gap: 8px;
+        }
+        
+        .mobile-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .mobile-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .mobile-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .mobile-action-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .mobile-action-btn:active {
+            background: var(--light);
+            transform: scale(0.95);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 999;
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .bottom-nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            color: #666;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .bottom-nav-item.active {
+            color: var(--primary);
+        }
+        
+        .bottom-nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 0 0 3px 3px;
+        }
+        
+        .bottom-nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .bottom-nav-label {
+            font-size: 12px;
+            display: block;
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 2000;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100%;
+            background: var(--white);
+            transition: left 0.3s ease;
+            z-index: 2001;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .mobile-menu.active {
+            left: 0;
+        }
+        
+        .mobile-menu-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .mobile-menu-user-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .mobile-menu-user-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        
+        .mobile-menu-user-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .mobile-menu-item {
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            gap: 16px;
+        }
+        
+        .mobile-menu-link:active {
+            background: var(--light);
+        }
+        
+        .mobile-menu-icon {
+            width: 24px;
+            color: var(--primary);
+        }
+        
+        .mobile-submenu {
+            list-style: none;
+            background: var(--light);
+            display: none;
+        }
+        
+        .mobile-menu-item.expanded .mobile-submenu {
+            display: block;
+        }
+        
+        .mobile-submenu-link {
+            display: block;
+            padding: 12px 20px 12px 60px;
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        
+        .mobile-submenu-link:active {
+            background: #e9ecef;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            padding: 20px 16px 80px;
+        }
+        
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .quick-action-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .quick-action-card:active {
+            transform: scale(0.98);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .quick-action-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        .quick-action-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .quick-action-desc {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* Announcements */
+        .announcements {
+            padding: 20px 16px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .section-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .announcement-list {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .announcement-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--light);
+            display: block;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+        
+        .announcement-item:active {
+            background: var(--light);
+        }
+        
+        .announcement-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: var(--white);
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+        
+        .announcement-title {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        
+        .announcement-meta {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: 16px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .fab:active {
+            transform: scale(0.95);
+        }
+        
+        /* Tablet and Desktop Responsive */
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+            
+            .quick-actions {
+                padding: 40px 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .quick-actions-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+            
+            .announcements {
+                padding: 40px 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .fab {
+                bottom: 40px;
+                right: 40px;
+            }
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Touch feedback */
+        @media (hover: none) {
+            .touchable {
+                -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+            }
+        }
+        
+        /* Safe area insets for iPhone X+ */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .bottom-nav {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #1a1a1a;
+                --dark: #f0f0f0;
+                --white: #222;
+                --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+                --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+                --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+            }
+            
+            body {
+                background: #000;
+            }
+            
+            .mobile-menu-overlay {
+                background: rgba(255,255,255,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="mobile-header-inner">
+            <a href="#" class="mobile-logo">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                </svg>
+                <span class="mobile-logo-text">신당동성당</span>
+            </a>
+            
+            <div class="mobile-actions">
+                <button class="mobile-action-btn" aria-label="검색">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+                <button class="mobile-action-btn" onclick="toggleMobileMenu()" aria-label="메뉴">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+    
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-user-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
+            <div class="mobile-menu-user-info">
+                <h3>환영합니다</h3>
+                <p>로그인하세요</p>
+            </div>
+        </div>
+        
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <a href="#" class="mobile-menu-link" onclick="toggleSubmenu(this)">
+                    <span class="mobile-menu-icon">🏛️</span>
+                    <span>본당안내</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </a>
+                <ul class="mobile-submenu">
+                    <li><a href="#" class="mobile-submenu-link">사목지침</a></li>
+                    <li><a href="#" class="mobile-submenu-link">본당연혁</a></li>
+                    <li><a href="#" class="mobile-submenu-link">성직/수도직</a></li>
+                    <li><a href="#" class="mobile-submenu-link">미사안내</a></li>
+                    <li><a href="#" class="mobile-submenu-link">주보</a></li>
+                    <li><a href="#" class="mobile-submenu-link">오시는길</a></li>
+                </ul>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#" class="mobile-menu-link">
+                    <span class="mobile-menu-icon">👥</span>
+                    <span>단체/복지시설</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#" class="mobile-menu-link">
+                    <span class="mobile-menu-icon">📁</span>
+                    <span>자료실</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#" class="mobile-menu-link">
+                    <span class="mobile-menu-icon">📋</span>
+                    <span>게시판</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#" class="mobile-menu-link">
+                    <span class="mobile-menu-icon">✝️</span>
+                    <span>가톨릭마당</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <div class="quick-actions-grid">
+                <a href="#" class="quick-action-card touchable">
+                    <div class="quick-action-icon">⏰</div>
+                    <div class="quick-action-title">미사시간</div>
+                    <div class="quick-action-desc">오늘의 미사</div>
+                </a>
+                
+                <a href="#" class="quick-action-card touchable">
+                    <div class="quick-action-icon">📰</div>
+                    <div class="quick-action-title">주보</div>
+                    <div class="quick-action-desc">이번주 소식</div>
+                </a>
+                
+                <a href="#" class="quick-action-card touchable">
+                    <div class="quick-action-icon">🗓️</div>
+                    <div class="quick-action-title">일정</div>
+                    <div class="quick-action-desc">성당 행사</div>
+                </a>
+                
+                <a href="#" class="quick-action-card touchable">
+                    <div class="quick-action-icon">📍</div>
+                    <div class="quick-action-title">오시는길</div>
+                    <div class="quick-action-desc">지도 보기</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Announcements -->
+        <section class="announcements">
+            <div class="section-header">
+                <h2 class="section-title">공지사항</h2>
+                <a href="#" class="section-more">더보기 →</a>
+            </div>
+            
+            <div class="announcement-list">
+                <a href="#" class="announcement-item touchable">
+                    <span class="announcement-badge">NEW</span>
+                    <div class="announcement-title">2025년 신년 미사 안내</div>
+                    <div class="announcement-meta">2025.01.01 | 사무실</div>
+                </a>
+                
+                <a href="#" class="announcement-item touchable">
+                    <div class="announcement-title">성탄 판공성사 일정 안내</div>
+                    <div class="announcement-meta">2024.12.15 | 사무실</div>
+                </a>
+                
+                <a href="#" class="announcement-item touchable">
+                    <div class="announcement-title">주일학교 교사 모집</div>
+                    <div class="announcement-meta">2024.12.10 | 교육부</div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="bottom-nav-item active">
+            <span class="bottom-nav-icon">🏠</span>
+            <span class="bottom-nav-label">홈</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <span class="bottom-nav-icon">📅</span>
+            <span class="bottom-nav-label">미사</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <span class="bottom-nav-icon">📋</span>
+            <span class="bottom-nav-label">게시판</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <span class="bottom-nav-icon">👤</span>
+            <span class="bottom-nav-label">내정보</span>
+        </a>
+    </nav>
+    
+    <!-- Floating Action Button -->
+    <button class="fab" aria-label="빠른 메뉴">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+        </svg>
+    </button>
+    
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const menu = document.querySelector('.mobile-menu');
+            overlay.classList.toggle('active');
+            menu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        // Submenu toggle
+        function toggleSubmenu(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('expanded');
+            
+            // Rotate arrow icon
+            const arrow = element.querySelector('svg');
+            arrow.style.transform = parent.classList.contains('expanded') ? 'rotate(180deg)' : '';
+        }
+        
+        // Touch feedback
+        document.querySelectorAll('.touchable').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.opacity = '0.7';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.opacity = '1';
+            });
+        });
+        
+        // Smooth scroll for better mobile experience
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Service Worker for offline support (optional)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>

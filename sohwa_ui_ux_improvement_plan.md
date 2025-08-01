@@ -211,7 +211,118 @@ body {
 3. **사용자 만족도**: 빠른 로딩과 직관적인 인터페이스
 4. **유지보수성**: 현대적인 기술 스택으로 개발자 확보 용이
 
+## 디자인 시스템
+
+### 색상 팔레트
+- **Primary**: #003FA8 (진한 파랑 - 신뢰감, 안정감)
+- **Secondary**: #0056D6 (밝은 파랑 - 활력)
+- **Accent**: #FFD700 (금색 - 신성함, 특별함)
+- **Success**: #28a745 (녹색 - 긍정)
+- **Warning**: #ffc107 (주황 - 주의)
+- **Danger**: #dc3545 (빨강 - 경고)
+- **Light**: #f8f9fa (연한 회색 - 배경)
+- **Dark**: #333 (진한 회색 - 텍스트)
+
+### 타이포그래피
+- **폰트**: Noto Sans KR (한글), -apple-system (시스템 폰트)
+- **크기 체계**:
+  - h1: 48px (메인 제목)
+  - h2: 36px (섹션 제목)
+  - h3: 24px (서브 제목)
+  - h4: 20px (카드 제목)
+  - body: 16px (본문)
+  - small: 14px (부가 정보)
+
+### 그리드 시스템
+- **최대 너비**: 1200px
+- **컬럼**: 12 column grid
+- **간격**: 30px gutter
+- **반응형 분기점**:
+  - Mobile: < 768px
+  - Tablet: 768px - 1024px
+  - Desktop: > 1024px
+
+### 컴포넌트 가이드
+
+#### 1. 버튼
+```css
+.btn {
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary { background: #003FA8; color: white; }
+.btn-secondary { background: transparent; border: 2px solid; }
+.btn-success { background: #28a745; color: white; }
+```
+
+#### 2. 카드
+```css
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+```
+
+#### 3. 폼 요소
+```css
+input, textarea {
+    padding: 12px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: #003FA8;
+    outline: none;
+}
+```
+
+### 애니메이션 가이드
+- **기본 전환**: 0.3s ease
+- **호버 효과**: transform, box-shadow 활용
+- **페이드인**: opacity + transform 조합
+- **로딩**: skeleton screen 사용
+
+### 접근성 체크리스트
+- [ ] 모든 이미지에 alt 텍스트
+- [ ] 폼 요소에 label 연결
+- [ ] 키보드 네비게이션 지원
+- [ ] ARIA 라벨 적절히 사용
+- [ ] 색상 대비 4.5:1 이상
+- [ ] 포커스 표시 명확히
+- [ ] 스크린리더 테스트
+
+### 성능 최적화 가이드
+1. **이미지 최적화**
+   - WebP 포맷 우선 사용
+   - 반응형 이미지 (srcset)
+   - Lazy loading 적용
+
+2. **CSS/JS 최적화**
+   - Critical CSS 인라인화
+   - JS 번들 분할
+   - 압축 및 최소화
+
+3. **캐싱 전략**
+   - 정적 자산 장기 캐싱
+   - Service Worker 활용
+   - CDN 사용 검토
+
 ## 참고 사항
 - 기존 콘텐츠와 URL 구조는 최대한 유지
 - 단계적 개선으로 서비스 중단 최소화
 - 사용자 교육 자료 제공 필요
+- 디자인 시스템 일관성 유지 중요

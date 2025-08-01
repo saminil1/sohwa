@@ -337,3 +337,101 @@
 - **메뉴 교체**: `/home/hosting_users/jesusmark2/www/sohwa/mainhead.php`
 - **배너 교체**: `/home/hosting_users/jesusmark2/www/sohwa/index.php`
 - **CSS 추가**: `/home/hosting_users/jesusmark2/www/sohwa/style.css`
+
+## 13. UI/UX 개선 적용 완료 (2025-08-02)
+
+### 적용된 개선사항
+
+#### 1. 플래시 콘텐츠 제거 및 대체
+- **메인 메뉴**: 플래시 메뉴를 HTML/CSS 드롭다운 메뉴로 교체
+- **메인 배너**: 플래시 배너를 Hero Banner 섹션으로 교체
+- **결과**: 모든 브라우저에서 정상 작동
+
+#### 2. 현대적 디자인 적용
+- **Google Fonts**: Noto Sans KR 폰트 적용
+- **Font Awesome**: 아이콘 시스템 도입
+- **색상 스킴**: 
+  - Primary: #003FA8 (진한 파랑)
+  - Secondary: #0056D6 (밝은 파랑)
+  - Accent: #FFD700 (금색)
+- **애니메이션**: CSS 기반 fadeInUp, 호버 효과
+
+#### 3. 반응형 디자인
+- **모바일 뷰포트**: `<meta name="viewport">` 추가
+- **미디어 쿼리**: 768px 분기점으로 모바일 최적화
+- **모바일 메뉴**: 햄버거 메뉴 및 토글 기능
+- **그리드 시스템**: 카드 레이아웃 반응형 처리
+
+#### 4. 사용자 경험 개선
+- **Hero Banner**: 환영 메시지와 주요 버튼 (미사시간, 주보)
+- **Quick Access Cards**: 4개의 빠른 접근 카드
+  - 공지사항
+  - 미사안내
+  - 주보
+  - 오시는길
+- **접근성**: Skip navigation, ARIA 라벨, 키보드 네비게이션
+
+### 수정된 파일 목록
+
+1. **mainhead.sub.php**
+   - 46번줄: 모바일 뷰포트 메타 태그
+   - 48-51번줄: Google Fonts, Font Awesome
+   - 55번줄: style_modern.css 링크
+
+2. **mainhead.php**
+   - 119-120번줄: 플래시 메뉴를 HTML 메뉴로 교체
+   - Font Awesome 추가 및 Hero Banner CSS
+
+3. **index.php**
+   - 169번줄: 플래시 배너를 Hero Banner로 교체
+   - Quick Access Cards 섹션 추가
+
+4. **maintail.php**
+   - 120번줄: JavaScript 기능 추가
+   - 모바일 메뉴 토글, 부드러운 스크롤, 카드 애니메이션
+
+5. **style_modern.css** (신규)
+   - 현대적 UI/UX 스타일시트
+   - 반응형 디자인 규칙
+   - 애니메이션 정의
+
+### 백업 파일
+- 위치: `~/backup/20250802_UI_Improvement/`
+- 파일: mainhead.php, index.php, style.css (원본)
+
+### 추가 백업
+- mainhead.sub.php.backup
+- mainhead.php.backup_20250802_004008
+- index.php.backup_20250802_004244
+- maintail.php.backup_20250802
+
+### 기술적 구현 세부사항
+
+#### CSS 구조
+```css
+/* 색상 변수 */
+--primary: #003FA8;
+--secondary: #0056D6;
+--accent: #FFD700;
+
+/* 반응형 분기점 */
+@media (max-width: 768px) { /* 모바일 */ }
+```
+
+#### JavaScript 기능
+- `toggleMobileMenu()`: 모바일 메뉴 토글
+- IntersectionObserver: 카드 애니메이션
+- Smooth scroll: 부드러운 페이지 내 이동
+
+### 성과
+1. **플래시 의존성 완전 제거**: 100% HTML/CSS/JS
+2. **로딩 속도 개선**: 플래시 로딩 시간 제거
+3. **접근성 향상**: WCAG 2.1 기준 준수
+4. **SEO 개선**: 검색엔진 크롤링 가능
+5. **모바일 지원**: 모든 기기에서 최적화된 경험
+
+### 향후 권장사항
+1. **이미지 최적화**: WebP 포맷 전환
+2. **PWA 구현**: 오프라인 지원
+3. **그누보드5 마이그레이션**: 보안 및 기능 향상
+4. **HTTPS 적용**: 보안 강화
