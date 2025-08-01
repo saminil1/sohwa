@@ -86,12 +86,12 @@ include_once("$g4[path]/lib/latest.lib.php");
                         <i class="fas fa-church"></i> 본당안내
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m101">사목지침</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m102">본당연혁</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m103">성직/수도직</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m105">미사안내</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m107">본당주보</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m109">오시는길</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m11">사목지침</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m12">본당연혁</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m13">성직/수도직</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m14">미사안내</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m15">본당주보</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m18">오시는길</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -99,12 +99,12 @@ include_once("$g4[path]/lib/latest.lib.php");
                         <i class="fas fa-users"></i> 단체&복지시설
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m301">사목협의회</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m302">단체소개</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m303">청년단체</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m304">청소년단체</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m305">근화유치원</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m306">소화묘원</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m21">사목협의회</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m22">단체소개</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m23">청년단체</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m24">청소년단체</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m26">근화유치원</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m27">소화묘원</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -112,9 +112,9 @@ include_once("$g4[path]/lib/latest.lib.php");
                         <i class="fas fa-folder-open"></i> 자료실
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m401">교리자료</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m402">기도문</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m403">성가자료</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m31">본당행사사진</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m32">영상자료</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m33">보고서및 문서양식</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -122,10 +122,10 @@ include_once("$g4[path]/lib/latest.lib.php");
                         <i class="fas fa-bullhorn"></i> 본당게시판
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m501">공지사항</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m502">예비자입교</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m503">교육/피정</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m504">행사일정</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m41">공지사항&본당소식</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m42">자유게시판</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m43">예비자입교</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m16">본당일정</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -133,10 +133,10 @@ include_once("$g4[path]/lib/latest.lib.php");
                         <i class="fas fa-comments"></i> 가톨릭마당
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m601">자유게시판</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m602">신앙상담</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m603">기도요청</a></li>
-                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m604">사진갤러리</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m51">성경과말씀나눔</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m52">성가/생활성가</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m53">가톨릭교리&교회문헌등</a></li>
+                        <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m55">기도하는방</a></li>
                     </ul>
                 </li>
             </ul>

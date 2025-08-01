@@ -44,9 +44,9 @@ if ($lo_url && $lo_ip && !preg_match("/admin/", $lo_url))
 // 시간이 지난 접속은 삭제한다
 sql_query(" delete from $g4[login_table] where lo_datetime < '".date("Y-m-d H:i:s", $g4['server_time'] - (60 * $config[cf_login_minutes]))."' ");
 
-// 분류
-$sql = " select * from $g4[yc4_category_table] where ca_id = '$ca_id' ";
-$ca = sql_fetch($sql);
+// 분류 - 영카트 사용하지 않으므로 주석처리
+// $sql = " select * from $g4[yc4_category_table] where ca_id = '$ca_id' ";
+// $ca = sql_fetch($sql);
 ?>
 <!DOCTYPE html>
 <html lang="ko">

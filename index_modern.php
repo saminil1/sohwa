@@ -12,10 +12,10 @@ include_once("./_mainhead.php");
         <h2>주님의 사랑과 평화가 함께하시길</h2>
         <p>천주교 서울대교구 신당동성당 소화에 오신 것을 환영합니다</p>
         <div class="hero-buttons">
-            <a href="<?=$g4['path']?>/bbs/board.php?bo_table=m105" class="btn btn-primary">
+            <a href="<?=$g4['path']?>/bbs/board.php?bo_table=m14" class="btn btn-primary">
                 <i class="fas fa-clock"></i> 미사시간 안내
             </a>
-            <a href="<?=$g4['path']?>/bbs/board.php?bo_table=m107" class="btn btn-secondary">
+            <a href="<?=$g4['path']?>/bbs/board.php?bo_table=m15" class="btn btn-secondary">
                 <i class="fas fa-newspaper"></i> 주보 보기
             </a>
         </div>
@@ -30,7 +30,7 @@ include_once("./_mainhead.php");
     </div>
     
     <div class="cards-grid">
-        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m501'">
+        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m41'">
             <div class="card-icon">
                 <i class="fas fa-bullhorn"></i>
             </div>
@@ -38,7 +38,7 @@ include_once("./_mainhead.php");
             <p>성당의 중요한 소식과<br>공지사항을 확인하세요</p>
         </div>
         
-        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m502'">
+        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m43'">
             <div class="card-icon">
                 <i class="fas fa-cross"></i>
             </div>
@@ -46,15 +46,15 @@ include_once("./_mainhead.php");
             <p>천주교 신자가 되기 위한<br>교리 교육 안내</p>
         </div>
         
-        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m504'">
+        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m16'">
             <div class="card-icon">
                 <i class="fas fa-calendar-alt"></i>
             </div>
-            <h4>행사일정</h4>
+            <h4>본당일정</h4>
             <p>성당의 주요 행사와<br>일정을 확인하세요</p>
         </div>
         
-        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m109'">
+        <div class="card" onclick="location.href='<?=$g4['path']?>/bbs/board.php?bo_table=m18'">
             <div class="card-icon">
                 <i class="fas fa-map-marked-alt"></i>
             </div>
@@ -72,10 +72,10 @@ include_once("./_mainhead.php");
             <div class="post-widget">
                 <div class="widget-header">
                     <h3><i class="fas fa-bell"></i> 공지사항</h3>
-                    <a href="<?=$g4['path']?>/bbs/board.php?bo_table=m501" class="more-link">더보기 <i class="fas fa-plus"></i></a>
+                    <a href="<?=$g4['path']?>/bbs/board.php?bo_table=m41" class="more-link">더보기 <i class="fas fa-plus"></i></a>
                 </div>
                 <div class="widget-content">
-                    <?= latest("modern_list", "m501", 5, 40)?>
+                    <?= latest("modern_list", "m41", 5, 40)?>
                 </div>
             </div>
 

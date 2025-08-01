@@ -25,11 +25,11 @@
                     <div class="footer-widget">
                         <h3 class="widget-title">바로가기</h3>
                         <ul class="footer-links">
-                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m105">미사시간</a></li>
-                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m107">주보</a></li>
-                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m501">공지사항</a></li>
-                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m502">예비자입교</a></li>
-                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m109">오시는길</a></li>
+                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m14">미사시간</a></li>
+                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m15">주보</a></li>
+                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m41">공지사항</a></li>
+                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m43">예비자입교</a></li>
+                            <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m18">오시는길</a></li>
                         </ul>
                     </div>
 
