@@ -1,0 +1,39 @@
+# Database config
+dbconfig.php
+dbconfig_old.php
+
+# Session files
+data/session/
+
+# Upload files
+data/file/
+data/cheditor4/
+
+# Backup files
+*.dump
+*.sql
+*.tar.gz
+*.zip
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Private files
+.env
+.htaccess
+.htpasswd
