@@ -578,3 +578,60 @@
 
 ### 백업
 - `menu_link_fix_20250802_012534.tar.gz` - 메뉴 수정 파일 아카이브
+
+## 16. 플래시 메뉴 HTML/CSS/JavaScript 교체 (2025-08-02)
+
+### 문제점
+- 메인 메뉴가 플래시(SWF)로 제작되어 모든 브라우저에서 작동하지 않음
+- 2020년 12월 이후 Flash Player 지원 종료
+- 사용자들이 메뉴를 통해 사이트 내비게이션 불가
+
+### 해결 방법
+
+#### 1. 파일 생성 및 수정
+1. **menu_include.php** - HTML 메뉴 구조와 스타일
+2. **menu_style.css** - 메뉴 스타일시트 (현재는 인라인으로 통합)
+3. **mainhead.php** - 119번째 줄 플래시 메뉴를 PHP include로 교체
+4. **mainhead.sub.php** - jQuery 1.12.4 추가 (65번째 줄)
+
+#### 2. 메뉴 구조
+```php
+<div class="menu-wrapper">
+    <ul class="main-menu">
+        <li>
+            <a href="<?=$g4['path']?>/bbs/group.php?gr_id=m1">본당안내</a>
+            <ul class="sub-menu">
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m11">사목지침</a></li>
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m12">본당연혁</a></li>
+                <!-- ... -->
+            </ul>
+        </li>
+        <!-- 나머지 메뉴들 -->
+    </ul>
+</div>
+```
+
+#### 3. 스타일 개선
+- **메인 메뉴 폰트**: 14px → 16px
+- **서브메뉴 폰트**: 12px → 14px
+- **색상 스킴**: 보라색 계열 (#7B1FA2, #5E35B1)
+- **서브메뉴 배경**: 흰색 배경에 보라색 텍스트
+- **호버 효과**: 색상 반전 (보라색 배경, 흰색 텍스트)
+
+#### 4. 기술적 구현
+- **레이아웃**: `display: table` 및 `table-cell` (구형 브라우저 호환)
+- **중앙 정렬**: `text-align: center`, `vertical-align: middle`
+- **서브메뉴**: CSS `:hover` 선택자로 표시/숨김
+- **z-index**: 9999로 최상위 레이어 보장
+
+### 백업 파일
+- `mainhead.php.backup_menu_fix` - 메뉴 수정 전 백업
+- `mainhead.sub.php.bak_menu` - jQuery 추가 전 백업
+- `/backup/rollback_20250802/` - UI 개선 롤백 시 사용한 백업들
+
+### 성과
+1. **접근성 향상**: 모든 브라우저에서 메뉴 정상 작동
+2. **사용자 경험 개선**: 직관적인 드롭다운 메뉴
+3. **성능 향상**: Flash 로딩 시간 제거
+4. **SEO 개선**: 검색엔진이 메뉴 링크 크롤링 가능
+5. **유지보수성**: HTML/CSS로 쉬운 수정 가능
