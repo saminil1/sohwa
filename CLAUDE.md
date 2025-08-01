@@ -223,3 +223,117 @@
 - **확보된 공간**: 약 5.1GB
 - **디스크 사용률**: 92% → 17%로 감소
 - **삭제된 총 파일 수**: 15,568개
+
+## 12. UI/UX 분석 및 개선안 (2025-08-02)
+
+### 현재 UI/UX 문제점
+
+#### 1. 플래시 의존성 (치명적)
+- **메인 메뉴**: `<?=latest("mainbn", menu, 1, 24); //플래시메뉴 ?>`
+- **메인 배너**: `<?=latest("mainbn", mainbanner, 1, 24); //플래시 이미지 ?>`
+- **플래시 파일**: main_fla.swf, sub_left_menu.swf 등
+- **문제**: 2020년 12월 이후 모든 브라우저에서 플래시 지원 중단으로 메뉴 접근 불가
+
+#### 2. 구식 웹 기술
+- **테이블 레이아웃**: 1004px 고정 너비
+- **이미지 슬라이싱**: m_01.jpg ~ m_11.jpg로 레이아웃 구성
+- **고정 폰트 크기**: 9pt
+- **반응형 미지원**: 모바일 사용 불가
+
+#### 3. 접근성 문제
+- 스크린리더 지원 불가
+- 키보드 네비게이션 불가
+- SEO 최적화 불가능
+
+### 긴급 개선안
+
+#### 1. 플래시 메뉴 HTML/CSS 대체
+```html
+<nav class="emergency-nav">
+    <ul>
+        <li><a href="<?=$g4['path']?>/bbs/group.php?gr_id=m1">본당안내</a>
+            <ul class="sub-menu">
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m101">사목지침</a></li>
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m102">본당연혁</a></li>
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m103">성직/수도직</a></li>
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m105">미사안내</a></li>
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m107">본당주보</a></li>
+                <li><a href="<?=$g4['path']?>/bbs/board.php?bo_table=m109">오시는길</a></li>
+            </ul>
+        </li>
+        <li><a href="<?=$g4['path']?>/bbs/group.php?gr_id=m3">단체&복지시설</a></li>
+        <li><a href="<?=$g4['path']?>/bbs/group.php?gr_id=m4">자료실</a></li>
+        <li><a href="<?=$g4['path']?>/bbs/group.php?gr_id=m5">본당게시판</a></li>
+        <li><a href="<?=$g4['path']?>/bbs/group.php?gr_id=m6">가톨릭마당</a></li>
+    </ul>
+</nav>
+```
+
+#### 2. 기본 CSS 스타일
+```css
+.emergency-nav {
+    background: #003FA8;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.emergency-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.emergency-nav a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.emergency-nav a:hover {
+    background: #0056D6;
+}
+
+.emergency-nav .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #0056D6;
+    display: none;
+    min-width: 180px;
+}
+
+.emergency-nav li:hover .sub-menu {
+    display: block;
+}
+```
+
+### 구현 우선순위
+
+1. **즉시 (1일 내)**
+   - 플래시 메뉴를 HTML 메뉴로 교체
+   - 플래시 배너를 정적 이미지로 교체
+
+2. **단기 (1주 내)**
+   - 반응형 CSS 적용
+   - 모바일 메뉴 구현
+
+3. **중기 (1개월 내)**
+   - 전체 레이아웃 현대화
+   - 이미지 최적화
+   - jQuery 도입
+
+4. **장기 (3개월 내)**
+   - 그누보드5 마이그레이션
+   - 완전한 반응형 리디자인
+   - PWA 구현 검토
+
+### 파일 수정 위치
+- **메뉴 교체**: `/home/hosting_users/jesusmark2/www/sohwa/mainhead.php`
+- **배너 교체**: `/home/hosting_users/jesusmark2/www/sohwa/index.php`
+- **CSS 추가**: `/home/hosting_users/jesusmark2/www/sohwa/style.css`
