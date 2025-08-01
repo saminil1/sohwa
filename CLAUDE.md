@@ -639,3 +639,42 @@
 3. **성능 향상**: Flash 로딩 시간 제거
 4. **SEO 개선**: 검색엔진이 메뉴 링크 크롤링 가능
 5. **유지보수성**: HTML/CSS로 쉬운 수정 가능
+
+## 17. Flash 배너 제거 작업 (2025-08-02)
+
+### 제거된 Flash 배너 목록
+
+#### 1. 메인 페이지 배너
+- **위치**: mainhead.php 124번 줄
+- **원본**: `<?=latest("mainbn", mainbanner, 1, 24); //플래시 이미지 ?>`
+- **처리**: 빈 줄로 교체
+
+#### 2. 서브페이지 상단 배너
+- **위치**: head.php 126번 줄
+- **원본**: `<?=latest("mainbn", leftmenu, 1, 24); //sub page top banner sub_img.swf ?>`
+- **처리**: 빈 줄로 교체
+
+#### 3. 서브페이지 좌측 배너
+- **위치**: head.php 147번 줄
+- **원본**: `<?=latest("mainbn", leftmenu, 1, 24); //sub page top banner sub_left_menu.swf ?>`
+- **처리**: 빈 줄로 교체
+
+### 수정된 파일 요약
+1. **mainhead.php** - 메인 페이지 Flash 배너 제거
+2. **head.php** - 서브페이지 Flash 배너 2개 제거
+
+### 기술적 세부사항
+- Flash 배너는 `latest()` 함수를 통해 mainbn 스킨으로 렌더링
+- mainbanner, leftmenu 게시판에서 Flash SWF 파일 링크 출력
+- 빈 줄로 교체하여 레이아웃 구조 유지
+
+### 성과
+1. **브라우저 호환성**: Flash 미지원 브라우저에서 에러 제거
+2. **페이지 로딩 속도**: Flash 로딩 시간 제거로 성능 향상
+3. **보안 강화**: Flash 보안 취약점 제거
+4. **깔끔한 UI**: 작동하지 않는 Flash 콘텐츠 영역 정리
+
+### 향후 권장사항
+- 배너 영역에 정적 이미지나 HTML5 슬라이더 추가 고려
+- mainbanner, leftmenu 게시판의 Flash 콘텐츠 정리
+- 필요시 JavaScript 기반 동적 배너 구현
