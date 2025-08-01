@@ -8,16 +8,19 @@
 - **운영체제**: CentOS Linux 7 (Core)
 - **커널**: Linux 3.10.0-1160.119.1.el7.x86_64
 
-### 디스크 사용량
+### 디스크 사용량 (2025-08-02 정리 후)
 - **총 할당량**: 7,000,000 블록 (약 6.7GB)
-- **현재 사용**: 6,442,360 블록 (약 6.1GB) - 92% 사용
-- **남은 공간**: 약 545MB
-- **파일 수**: 29,090개
+- **현재 사용**: 1,171MB (17% 사용) - 이전: 6,292MB (92%)
+- **남은 공간**: 약 5,665MB (5.5GB)
+- **파일 수**: 13,631개 (이전: 29,090개)
 
-### 주요 디렉토리 크기
-- **/www/sohwa**: 5.6GB (메인 웹사이트)
-- **/www/sohwa/data**: 433MB (업로드 및 캐시 데이터)
-- **/www/sohwa/data/session**: 1.7GB (세션 파일 - 정리 필요)
+### 주요 디렉토리 크기 (2025-08-02 정리 후)
+- **/www/sohwa**: 메인 웹사이트
+- **/www/sohwa/data**: 327MB (이전: 5.4GB)
+- **/www/sohwa/data/file**: 325MB (이전: 4.4GB)
+- **/www/sohwa/data/cheditor4**: 176KB (이전: 441MB)
+- **/www/sohwa/data/geditor**: 244KB (이전: 508MB)
+- **/www/sohwa/data/session**: 1.8MB
 
 ## 2. 웹 애플리케이션 구조
 
@@ -194,7 +197,29 @@
 - **사용자**: jesusmark2
 - **비밀번호**: wotjddl2
 
+### 관리자 페이지 접속
+- **URL**: http://sohwa.org/sohwa/adm/
+- **아이디**: admin
+- **비밀번호**: ikongboo26341@ (2025-08-01 재설정)
+
 ### 주요 경로
 - **홈 디렉토리**: /home/hosting_users/jesusmark2
 - **웹 루트**: /home/hosting_users/jesusmark2/www
 - **그누보드**: /home/hosting_users/jesusmark2/www/sohwa
+
+## 11. 디스크 공간 정리 기록 (2025-08-02)
+
+### 정리 작업 내용
+1. **file 디렉토리**: 3년 이상 된 파일 13,611개 삭제 (1.3GB)
+2. **cheditor4 디렉토리**: 3년 이상 된 파일 1,346개 삭제 (441MB)
+3. **geditor 디렉토리**: 3년 이상 된 파일 611개 삭제 (508MB)
+
+### 백업 파일 위치
+- `/home/hosting_users/jesusmark2/old_files_list_20250801.txt`
+- `/home/hosting_users/jesusmark2/old_cheditor_files_20250801.txt`
+- `/home/hosting_users/jesusmark2/old_geditor_files_20250801.txt`
+
+### 정리 결과
+- **확보된 공간**: 약 5.1GB
+- **디스크 사용률**: 92% → 17%로 감소
+- **삭제된 총 파일 수**: 15,568개
