@@ -1,6 +1,6 @@
-# 소화유니폼 (Sohwa Uniform) Website
+# 소화 (Sohwa) Website
 
-신당동 성당 소화유니폼 웹사이트 프로젝트
+신당동성당 소화 웹사이트 프로젝트
 
 ## 개요
 - **도메인**: https://www.sohwa.org
@@ -40,5 +40,5 @@
 - [API 문서](./docs/api.md)
 
 ## 연락처
-- 신당동 성당 소화유니폼
+- 신당동성당 소화
 - 이메일: admin@sohwa.org
