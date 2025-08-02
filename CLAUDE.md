@@ -910,3 +910,86 @@ tar -xzf DataBackup/jesusmark2-2025-08-01.tar.gz \
 - 백업 파일의 경로 구조: `www/sohwa/data/file/`
 - `home/hosting_users/jesusmark2/`가 아님에 주의
 - tar 명령어에서 `-C /` 옵션 사용하여 루트부터 복구
+
+## 20. Git 버전 관리 설정 (2025-08-02)
+
+### Git 저장소 초기화
+웹사이트 코드를 GitHub에서 버전 관리하기 위한 설정 완료
+
+### 설정 내용
+
+#### 1. Git 초기화
+```bash
+cd /home/hosting_users/jesusmark2/www/sohwa
+git init
+git config user.email "saminil@example.com"
+git config user.name "saminil"
+```
+
+#### 2. .gitignore 파일 생성
+제외할 파일/디렉토리:
+- `data/session/*` - 세션 파일
+- `data/cache/*` - 캐시 파일
+- `data/tmp/*` - 임시 파일
+- `data/file/*` - 업로드된 이미지/파일
+- `data/cheditor4/*` - 에디터 업로드
+- `data/geditor/*` - 에디터 업로드
+- `data/dbconfig.php` - DB 설정 (보안)
+- `*.sql`, `*.dump`, `*.tar.gz` - 백업 파일
+- `.DS_Store`, `Thumbs.db` - OS 파일
+
+#### 3. 첫 커밋 생성
+```bash
+git add *.php *.html *.css *.js .gitignore .htaccess
+git commit -m "Initial commit: Core files"
+```
+
+#### 4. GitHub 원격 저장소 연결
+```bash
+git remote add origin https://github.com/saminil1/sohwa.git
+git fetch origin
+git checkout -b website-code
+```
+
+### 현재 상태
+- **Git 버전**: 1.8.3.1 (서버)
+- **브랜치**: website-code
+- **원격 저장소**: https://github.com/saminil1/sohwa.git
+- **상태**: 로컬 Git 저장소 설정 완료, GitHub 인증 필요
+
+### 향후 작업 방법
+
+#### 서버에서 변경사항 추적
+```bash
+# 상태 확인
+git status
+
+# 변경사항 추가 및 커밋
+git add .
+git commit -m "변경 내용 설명"
+
+# 변경 이력 확인
+git log --oneline
+```
+
+#### 백업 및 동기화 방법
+1. **수동 백업**
+   ```bash
+   # 로컬에서 Git 저장소 다운로드
+   scp -r jesusmark2@sohwa.org:/home/hosting_users/jesusmark2/www/sohwa/.git ./backup/
+   ```
+
+2. **정기 백업 스크립트**
+   - 서버에서 주기적으로 git commit
+   - 백업 파일 다운로드 자동화
+
+### 주의사항
+- Git 버전이 낮아 일부 최신 기능 사용 불가
+- GitHub 직접 push를 위해서는 인증 설정 필요
+- 대용량 파일은 .gitignore로 제외됨
+
+### 권장사항
+1. SSH 키 기반 인증 설정
+2. 자동 백업 시스템 구축
+3. 개발/운영 환경 분리
+4. CI/CD 파이프라인 구축 검토
