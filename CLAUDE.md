@@ -751,3 +751,131 @@ $g4['url'] = $protocol . $_SERVER['HTTP_HOST'];
 2. 외부 리소스(CDN 등)도 HTTPS 지원 확인
 3. 호스팅 제어판에서 HTTPS 강제 리다이렉션 설정
 4. SSL 인증서 자동 갱신 확인
+
+## 19. 이미지 파일 삭제 및 복구 가이드 (2025-08-02)
+
+### 문제 발생 상황
+2025-08-02 디스크 공간 정리 작업 중 3년 이상 된 파일들이 삭제되면서 중요한 이미지들이 손실됨
+
+### 삭제된 주요 이미지
+1. **우측 퀵메뉴 (rightbanner)**
+   - 위치: `/www/sohwa/data/file/rightbanner/`
+   - 삭제된 파일:
+     - `1039914704_jKP4dbEr_1.jpg`
+     - `1039914704_xdgJr59j_5.jpg`
+     - `1039914704_9lTMCaJU_daycare.jpg`
+     - `1981855778_dmtEvNCI_rbn.jpg`
+
+2. **본당행사사진 갤러리 (gellary_02)**
+   - 위치: `/www/sohwa/data/file/gellary_02/`
+   - 삭제된 파일 수: 5,562개
+   - 모든 갤러리 이미지가 `no_image.gif`로 표시됨
+
+### 백업 정보
+- **백업 파일**: `/home/hosting_users/jesusmark2/DataBackup/jesusmark2-2025-08-01.tar.gz`
+- **파일 크기**: 5.8GB
+- **생성일**: 2025-08-01 (정리 작업 전)
+- **삭제 파일 목록**: `/home/hosting_users/jesusmark2/old_files_list_20250801.txt`
+
+### 서버 관리자를 위한 복구 가이드
+
+#### 1. SSH 접속
+```bash
+ssh jesusmark2@sohwa.org
+# 비밀번호: wotjddl2
+```
+
+#### 2. 백업 파일 확인
+```bash
+cd /home/hosting_users/jesusmark2
+ls -lh DataBackup/jesusmark2-2025-08-01.tar.gz
+```
+
+#### 3. 우측 퀵메뉴(rightbanner) 이미지 복구
+```bash
+# 작업 디렉토리로 이동
+cd /home/hosting_users/jesusmark2
+
+# rightbanner 이미지만 추출 (빠름)
+tar -xzf DataBackup/jesusmark2-2025-08-01.tar.gz \
+  home/hosting_users/jesusmark2/www/sohwa/data/file/rightbanner/ \
+  --strip-components=5 \
+  -C www/sohwa/data/file/
+
+# 복구된 파일 확인
+ls -la www/sohwa/data/file/rightbanner/
+```
+
+#### 4. 본당행사사진(gellary_02) 이미지 복구
+```bash
+# 갤러리 이미지 복구 (시간이 오래 걸릴 수 있음)
+tar -xzf DataBackup/jesusmark2-2025-08-01.tar.gz \
+  home/hosting_users/jesusmark2/www/sohwa/data/file/gellary_02/ \
+  --strip-components=5 \
+  -C www/sohwa/data/file/
+
+# 복구된 파일 수 확인
+ls -la www/sohwa/data/file/gellary_02/ | wc -l
+```
+
+#### 5. 특정 파일만 복구하기 (선택사항)
+```bash
+# 백업 파일 내용 확인 (rightbanner만)
+tar -tzf DataBackup/jesusmark2-2025-08-01.tar.gz | grep rightbanner
+
+# 특정 파일만 복구
+tar -xzf DataBackup/jesusmark2-2025-08-01.tar.gz \
+  "home/hosting_users/jesusmark2/www/sohwa/data/file/rightbanner/1039914704_jKP4dbEr_1.jpg" \
+  "home/hosting_users/jesusmark2/www/sohwa/data/file/rightbanner/1039914704_xdgJr59j_5.jpg" \
+  "home/hosting_users/jesusmark2/www/sohwa/data/file/rightbanner/1039914704_9lTMCaJU_daycare.jpg" \
+  --strip-components=5 \
+  -C www/sohwa/data/file/
+```
+
+#### 6. 권한 설정 확인
+```bash
+# 복구 후 권한 확인
+chown -R jesusmark2:jesusmark2 www/sohwa/data/file/rightbanner/
+chown -R jesusmark2:jesusmark2 www/sohwa/data/file/gellary_02/
+chmod -R 755 www/sohwa/data/file/rightbanner/
+chmod -R 755 www/sohwa/data/file/gellary_02/
+```
+
+#### 7. 웹사이트에서 확인
+- https://sohwa.org 접속
+- 우측 퀵메뉴 이미지 표시 확인
+- 본당행사사진 갤러리 이미지 표시 확인
+
+### 주의사항
+1. **백업 파일이 5.8GB로 매우 크므로** 복구 작업에 시간이 걸릴 수 있음
+2. **디스크 공간 확인**: 복구 전 충분한 공간이 있는지 확인
+   ```bash
+   df -h
+   ```
+3. **부분 복구 권장**: 전체 복구보다는 필요한 디렉토리만 선택적으로 복구
+
+### 문제 발생 시
+- 백업 파일이 손상된 경우: 다른 날짜의 백업 확인
+- 권한 문제: root 권한이나 hosting 사용자로 작업
+- 공간 부족: 불필요한 파일 정리 후 재시도
+
+### 향후 예방책
+1. `/data/file/` 디렉토리는 자동 정리 대상에서 제외
+2. 이미지 파일은 연도별로 아카이빙
+3. 정기적인 백업 및 복구 테스트
+4. 파일 정리 전 중요 디렉토리 확인
+
+### 디렉토리 구조 설명
+```
+/home/hosting_users/jesusmark2/
+├── www/                         # 웹 루트 디렉토리
+│   ├── index.html              # 메인 페이지 (iframe으로 sohwa 호출)
+│   └── sohwa/                  # 그누보드4 설치 디렉토리
+│       ├── data/               # 데이터 디렉토리
+│       │   └── file/           # 업로드 파일 저장소
+│       │       ├── rightbanner/    # 우측 퀵메뉴 이미지
+│       │       └── gellary_02/     # 갤러리 이미지
+│       └── (기타 그누보드 파일들)
+```
+
+이 구조는 Cafe24 호스팅의 표준 구조로, 원래부터 이렇게 구성되어 있었음
