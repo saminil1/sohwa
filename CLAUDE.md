@@ -993,3 +993,58 @@ git log --oneline
 2. 자동 백업 시스템 구축
 3. 개발/운영 환경 분리
 4. CI/CD 파이프라인 구축 검토
+
+## 21. 메뉴 서브메뉴 스타일 조정 (2025-08-02)
+
+### 수정 내용
+메인 메뉴와 서브메뉴의 위치 및 크기 조정
+
+### 변경 사항
+
+#### 1. 서브메뉴 위치 조정 이력
+- 초기값: `top: 69px` (메인 메뉴 바로 아래)
+- 변경 과정:
+  - `top: 68px` → `top: 30px` → `top: 37px` → `top: 45px` → `top: 43px`
+- 최종값: `top: 43px` (메인 메뉴 하단 가까이에 위치)
+
+#### 2. 서브메뉴 너비 조정
+- 변경 전:
+  ```css
+  width: 180px;
+  left: 50%;
+  margin-left: -90px;
+  ```
+- 변경 후:
+  ```css
+  width: 100%;  /* 상위 메뉴와 동일한 너비 */
+  left: 0;
+  ```
+
+### 수정된 파일
+- `/www/sohwa/menu_include.php`
+
+### 최종 CSS 코드
+```css
+/* 서브메뉴 */
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 43px;  /* 메인 메뉴 하단 가까이에 위치 */
+    left: 0;
+    width: 100%;  /* 상위 메뉴와 동일한 너비 */
+    background-color: #ffffff;
+    border: 1px solid #7B1FA2;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 9999;
+    list-style: none;
+    padding: 0;
+}
+```
+
+### 결과
+- 서브메뉴가 메인 메뉴 배경 배너 아래쪽에 가깝게 위치
+- 서브메뉴 너비가 상위 메뉴 항목과 정확히 일치
+- 각 메인 메뉴 항목 호버 시 해당 항목의 전체 너비로 서브메뉴 표시
+
+### 백업 파일
+- `menu_include.php.bak_submenu_position`
