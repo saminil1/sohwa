@@ -678,3 +678,76 @@
 - 배너 영역에 정적 이미지나 HTML5 슬라이더 추가 고려
 - mainbanner, leftmenu 게시판의 Flash 콘텐츠 정리
 - 필요시 JavaScript 기반 동적 배너 구현
+
+## 18. HTTPS 지원 설정 (2025-08-02)
+
+### 문제 상황
+- HTTP에서 HTTPS로 변경 시 웹사이트가 표시되지 않음
+- Mixed Content 오류로 인한 콘텐츠 차단
+- iframe에서 HTTP URL 하드코딩
+
+### 해결 방법
+
+#### 1. 루트 index.html 수정
+- **위치**: `/www/index.html`
+- **변경 내용**: iframe src 속성을 프로토콜 상대 URL로 변경
+```html
+<!-- 변경 전 -->
+<iframe src=http://sohwa.org/sohwa/index.php?hostname=<?=$hostname;?>>
+
+<!-- 변경 후 -->
+<iframe src=//sohwa.org/sohwa/index.php?hostname=<?=$hostname;?>>
+```
+
+#### 2. common.php HTTPS 자동 감지 추가
+- **위치**: `/www/sohwa/common.php` (146번째 줄)
+- **변경 내용**: HTTPS 프로토콜 자동 감지 코드 추가
+```php
+// 변경 전
+$g4['url'] = 'http://' . $_SERVER['HTTP_HOST'];
+
+// 변경 후
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+$g4['url'] = $protocol . $_SERVER['HTTP_HOST'];
+```
+
+#### 3. 하드코딩된 HTTP URL 수정
+- **파일**: `tail.php`
+- **변경**: `http://sohwa.org` → `//sohwa.org`
+- 프로토콜 상대 URL로 변경하여 HTTP/HTTPS 모두 지원
+
+#### 4. .htaccess 파일
+- **상태**: 최소 설정만 적용
+- **내용**: `Options -Indexes` (디렉토리 인덱싱 비활성화)
+- **주의**: Cafe24 호스팅은 .htaccess 지원이 제한적
+
+### 백업 파일
+- `index.html.bak_https`
+- `common.php.bak_https`
+- `tail.php.bak_https`
+- `.htaccess.error` (500 에러 발생한 파일)
+
+### 기술적 세부사항
+1. **Mixed Content 해결**
+   - 모든 리소스를 프로토콜 상대 URL 또는 HTTPS로 로드
+   - iframe, 이미지, 스크립트 등 모든 외부 리소스 점검
+
+2. **프로토콜 감지**
+   - `$_SERVER['HTTPS']` 변수로 HTTPS 여부 확인
+   - 'off'가 아닌 값이면 HTTPS로 판단
+
+3. **호스팅 제약사항**
+   - Cafe24 공유 호스팅은 .htaccess 기능 제한
+   - mod_rewrite, mod_headers 등 일부 모듈 비활성화
+   - HTTPS 리다이렉션은 호스팅 제어판에서 설정 권장
+
+### 결과
+- HTTP(http://sohwa.org)와 HTTPS(https://sohwa.org) 모두 정상 작동
+- Mixed Content 경고 없이 안전한 연결
+- 모든 리소스가 올바른 프로토콜로 로드
+
+### 향후 권장사항
+1. 모든 내부 링크를 프로토콜 상대 URL로 변경
+2. 외부 리소스(CDN 등)도 HTTPS 지원 확인
+3. 호스팅 제어판에서 HTTPS 강제 리다이렉션 설정
+4. SSL 인증서 자동 갱신 확인
