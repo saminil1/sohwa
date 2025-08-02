@@ -879,3 +879,34 @@ chmod -R 755 www/sohwa/data/file/gellary_02/
 ```
 
 이 구조는 Cafe24 호스팅의 표준 구조로, 원래부터 이렇게 구성되어 있었음
+
+### 복구 완료 (2025-08-02)
+
+#### 실제 사용된 복구 명령어
+```bash
+cd /home/hosting_users/jesusmark2
+tar -xzf DataBackup/jesusmark2-2025-08-01.tar.gz \
+    "www/sohwa/data/file/" \
+    -C /
+```
+
+#### 복구 결과
+1. **rightbanner (우측 퀵메뉴)**
+   - 복구된 이미지: 4개
+   - `1039914704_9lTMCaJU_daycare.jpg`
+   - `1039914704_jKP4dbEr_1.jpg`
+   - `1039914704_xdgJr59j_5.jpg`
+   - `1981855778_dmtEvNCI_rbn.jpg`
+
+2. **gellary_02 (본당행사사진)**
+   - 복구된 파일: 8,848개 (디렉토리 포함)
+   - 원래 삭제된 5,562개보다 많은 파일이 복구됨
+
+3. **복구 확인**
+   - https://sohwa.org 메인페이지 우측 퀵메뉴 정상 표시
+   - 본당행사사진 갤러리 이미지 정상 표시
+
+#### 주의사항 (백업 경로)
+- 백업 파일의 경로 구조: `www/sohwa/data/file/`
+- `home/hosting_users/jesusmark2/`가 아님에 주의
+- tar 명령어에서 `-C /` 옵션 사용하여 루트부터 복구
